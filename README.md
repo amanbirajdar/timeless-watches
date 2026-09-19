@@ -1,6 +1,59 @@
 # Timeless Watches
 
-A static luxury watch storefront built with HTML, CSS, and JavaScript. It includes a browser-based cart and checkout flow in `buy.html`.
+![Timeless Watches](home.png)
+
+**Timeless Watches** is a responsive luxury watch storefront built with HTML, CSS, and vanilla JavaScript. It is designed as a GitHub Pages-ready static site, so it can run without a server or database.
+
+## Live website
+
+Visit the deployed project:
+
+**[https://amanbirajdar.github.io/timeless-watches/](https://amanbirajdar.github.io/timeless-watches/)**
+
+## Project features
+
+- Responsive luxury watch storefront for desktop, tablet, and mobile.
+- Product collection with Rolex, Omega, TAG Heuer, Breitling, Seiko, Samsung, Apple, Hublot, and Jaeger watches.
+- Product search by name or brand.
+- Category filters for luxury, sport, classic, and smart watches.
+- Brand shortcuts and sale-only product filtering.
+- Quick-view product modal with pricing, ratings, and specifications.
+- Add to cart, quantity controls, remove item, clear cart, and cart total calculation.
+- Buy Now flow that takes a product directly to checkout.
+- Dedicated checkout page with:
+  - Delivery details and validation.
+  - UPI, card, and cash-on-delivery selection.
+  - Shipping calculation.
+  - Order summary and generated order ID.
+  - Order confirmation screen.
+- Browser-based login and registration demo.
+- Remember-me sessions and logout.
+- Wishlist support.
+- Newsletter subscription storage.
+- Contact form with success feedback.
+- Social media, support, FAQ, shipping, returns, and policy links.
+- GitHub Actions deployment to GitHub Pages.
+
+## Screenshots
+
+### Storefront
+
+![Timeless Watches storefront](home.png)
+
+### Checkout
+
+![Timeless Watches checkout](checkout.png)
+
+## Technology
+
+- HTML5
+- CSS3
+- Bootstrap 5
+- Bootstrap Icons
+- Vanilla JavaScript
+- Browser `localStorage` and `sessionStorage`
+- GitHub Actions
+- GitHub Pages
 
 ## Run locally
 
@@ -14,15 +67,14 @@ Then open `http://localhost:8000`.
 
 ## Publish on GitHub Pages
 
-1. Create a GitHub repository and upload the project files, including `index.html`, `login.html`, `app.js`, `style.css`, `images/`, and `.github/workflows/deploy-pages.yml`.
-2. Push the files to the repository's `main` branch.
-3. In **Settings → Pages**, set **Source** to **GitHub Actions**.
-4. Wait for the **Deploy static site to GitHub Pages** workflow to finish.
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`. Every push to `main` can deploy the static site automatically.
 
-The site uses relative links and asset paths, so it works both at a local URL and at a repository URL such as:
+The project uses relative links and asset paths, so it works at the repository Pages URL:
 
 ```text
-https://<username>.github.io/<repository>/
+https://amanbirajdar.github.io/timeless-watches/
 ```
 
-Login, cart, wishlist, newsletter, and demo order data are stored in the visitor's browser with `localStorage`; no server or database is required. Checkout is a static demo flow and does not process real payments.
+## Storage and checkout note
+
+Login, cart, wishlist, newsletter, and demo order data are stored in the visitor's browser using `localStorage` and `sessionStorage`. The checkout is a functional static demo flow, but it does not charge real payments or send real emails. A production store would connect the checkout to a secure backend and a payment provider such as Razorpay or Stripe.
