@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout - Timeless Watches</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0a0e1a;--navy2:#0f1628;--navy3:#151d35;--blue:#1a73e8;--accent:#00d4ff;--silver:#c0c8d8;--muted:#7a8ba0;--border:rgba(255,255,255,.09);--danger:#ff4757;--success:#2ed573}
+    *{box-sizing:border-box}body{margin:0;background:var(--navy);color:var(--silver);font-family:Poppins,sans-serif;min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(26,115,232,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,115,232,.04) 1px,transparent 1px);background-size:50px 50px}
+    .topbar{position:relative;border-bottom:1px solid var(--border);background:rgba(10,14,26,.92);padding:18px 0}.brand{font:700 1.45rem "Playfair Display",serif;text-decoration:none;background:linear-gradient(135deg,#4da3ff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .back{color:var(--silver);text-decoration:none;font-size:.85rem}.back:hover{color:var(--accent)}
+    .checkout-wrap{position:relative;padding:42px 0 70px}.step{color:var(--accent);font-size:.74rem;text-transform:uppercase;letter-spacing:2px}.title{font:700 2.3rem "Playfair Display",serif;color:#e8ecf4;margin:5px 0 8px}.subtitle{color:var(--muted);font-size:.9rem}
+    .panel{background:rgba(15,22,40,.94);border:1px solid var(--border);border-radius:18px;padding:26px}.panel h2{font:700 1.35rem "Playfair Display",serif;color:#e8ecf4;margin:0 0 20px}.form-label{font-size:.78rem;color:var(--silver);margin-bottom:6px}.form-control,.form-select{background:rgba(255,255,255,.045);border:1px solid var(--border);color:#e8ecf4;border-radius:10px;padding:11px 13px}.form-control:focus,.form-select:focus{background:rgba(255,255,255,.07);border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,.12);color:#fff}.form-select option{background:var(--navy2)}
+    .payment-option{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;margin-bottom:10px}.payment-option:has(input:checked){border-color:var(--accent);background:rgba(0,212,255,.06)}.payment-option input{accent-color:var(--accent)}.payment-option span{font-size:.86rem}.payment-option i{color:var(--accent);font-size:1.1rem}
+    .summary-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}.summary-img{width:58px;height:58px;object-fit:cover;border-radius:10px;background:var(--navy3)}.summary-name{color:#e8ecf4;font-weight:600;font-size:.83rem}.summary-meta{color:var(--muted);font-size:.74rem}.summary-price{margin-left:auto;color:var(--accent);font-weight:600;font-size:.84rem;white-space:nowrap}.totals{margin-top:16px}.total-row{display:flex;justify-content:space-between;margin:8px 0;font-size:.84rem}.grand{color:#e8ecf4;font-size:1.15rem;font-weight:700;border-top:1px solid var(--border);padding-top:14px;margin-top:14px}.grand strong{color:var(--accent)}.place-order{width:100%;border:0;border-radius:11px;padding:14px;background:linear-gradient(135deg,var(--blue),#0d5cc7);color:#fff;font-weight:700;margin-top:18px}.place-order:disabled{opacity:.55}.secure{color:var(--muted);font-size:.75rem;text-align:center;margin-top:12px}.empty{text-align:center;padding:65px 20px}.empty i{font-size:3.5rem;color:var(--muted)}.success{display:none;text-align:center;padding:50px 20px}.success.show{display:block}.success-icon{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(46,213,115,.12);border:1px solid rgba(46,213,115,.35);color:var(--success);font-size:2.5rem}.success h2{color:#e8ecf4;font:700 1.8rem "Playfair Display",serif}.success p{color:var(--muted);font-size:.88rem}.btn-store{display:inline-block;background:var(--navy3);border:1px solid var(--border);color:var(--accent);border-radius:10px;padding:10px 18px;text-decoration:none;font-size:.85rem}
+    @media(max-width:767px){.title{font-size:1.9rem}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="container d-flex justify-content-between align-items-center"><a class="brand" href="index.html"><i class="bi bi-smartwatch me-2"></i>Timeless Watches</a><a class="back" href="index.html"><i class="bi bi-arrow-left me-1"></i>Continue shopping</a></div></header>
+  <main class="checkout-wrap container">
+    <div id="checkoutContent">
+      <div class="step">Secure checkout</div><h1 class="title">Complete your purchase</h1><p class="subtitle mb-4">Your order is protected with secure demo checkout. No payment is charged.</p>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <form id="checkoutForm" class="panel" novalidate>
+            <h2><i class="bi bi-truck me-2" style="color:var(--accent)"></i>Delivery details</h2>
+            <div class="row g-3">
+              <div class="col-sm-6"><label class="form-label">First name</label><input id="firstName" class="form-control" required></div>
+              <div class="col-sm-6"><label class="form-label">Last name</label><input id="lastName" class="form-control" required></div>
+              <div class="col-sm-6"><label class="form-label">Email</label><input id="email" type="email" class="form-control" required></div>
+              <div class="col-sm-6"><label class="form-label">Phone</label><input id="phone" class="form-control" pattern="[6-9][0-9]{9}" placeholder="10-digit number" required></div>
+              <div class="col-12"><label class="form-label">Address</label><input id="address" class="form-control" placeholder="House number, street and area" required></div>
+              <div class="col-sm-5"><label class="form-label">City</label><input id="city" class="form-control" required></div>
+              <div class="col-sm-4"><label class="form-label">State</label><select id="state" class="form-select" required><option value="">Select state</option><option>Delhi</option><option>Maharashtra</option><option>Karnataka</option><option>Tamil Nadu</option><option>Uttar Pradesh</option><option>Other</option></select></div>
+              <div class="col-sm-3"><label class="form-label">PIN code</label><input id="pin" class="form-control" pattern="[0-9]{6}" required></div>
+            </div>
+            <h2 class="mt-4"><i class="bi bi-credit-card me-2" style="color:var(--accent)"></i>Payment method</h2>
+            <label class="payment-option"><input type="radio" name="payment" value="UPI" checked><i class="bi bi-phone"></i><span>UPI / QR payment</span></label>
+            <label class="payment-option"><input type="radio" name="payment" value="Card"><i class="bi bi-credit-card"></i><span>Credit or debit card</span></label>
+            <label class="payment-option"><input type="radio" name="payment" value="COD"><i class="bi bi-cash-coin"></i><span>Cash on delivery</span></label>
+            <div id="formError" class="text-danger mt-3" style="font-size:.8rem;display:none"></div>
+            <button class="place-order" type="submit"><i class="bi bi-lock me-2"></i>Place order securely</button>
+            <div class="secure"><i class="bi bi-shield-check me-1"></i>Demo checkout · Your data stays in this browser</div>
+          </form>
+        </div>
+        <div class="col-lg-5"><div class="panel"><h2>Your order</h2><div id="orderItems"></div><div class="totals"><div class="total-row"><span>Subtotal</span><span id="subtotal"></span></div><div class="total-row"><span>Shipping</span><span id="shipping"></span></div><div class="total-row grand"><span>Total</span><strong id="grandTotal"></strong></div></div></div></div>
+      </div>
+    </div>
+    <section id="success" class="panel success"><div class="success-icon"><i class="bi bi-check-lg"></i></div><h2>Order confirmed!</h2><p id="successText"></p><a class="btn-store" href="index.html"><i class="bi bi-shop me-1"></i>Back to store</a></section>
+    <section id="empty" class="panel empty" style="display:none"><i class="bi bi-bag-x"></i><h2 class="mt-3" style="color:#e8ecf4;font:700 1.5rem 'Playfair Display',serif">Your cart is empty</h2><p style="color:var(--muted)">Add a watch before opening checkout.</p><a class="btn-store" href="index.html#collection">Browse collection</a></section>
+  </main>
+  <script>
+    const INR = n => '₹' + Number(n).toLocaleString('en-IN');
+    let cart = JSON.parse(localStorage.getItem('tw_cart') || '[]');
+    const session = JSON.parse(localStorage.getItem('tw_session') || sessionStorage.getItem('tw_session') || 'null');
+    const $ = id => document.getElementById(id);
+    function renderOrder() {
+      if (!cart.length) { $('checkoutContent').style.display='none'; $('empty').style.display='block'; return; }
+      const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+      $('orderItems').innerHTML = cart.map(item => '<div class="summary-item"><img class="summary-img" src="'+item.img+'" alt="'+item.name+'"><div><div class="summary-name">'+item.name+'</div><div class="summary-meta">'+item.brand+' · Qty '+item.qty+'</div></div><span class="summary-price">'+INR(item.price * item.qty)+'</span></div>').join('');
+      $('subtotal').textContent = INR(subtotal); $('shipping').textContent = subtotal >= 10000 ? 'FREE' : INR(299); $('grandTotal').textContent = INR(subtotal >= 10000 ? subtotal : subtotal + 299);
+      if (session && session.loggedIn) { $('firstName').value=session.name || ''; $('lastName').value=session.lastName || ''; $('email').value=session.email || ''; $('phone').value=session.phone || ''; }
+    }
+    $('checkoutForm').addEventListener('submit', event => {
+      event.preventDefault(); const form=event.currentTarget; const error=$('formError');
+      if (!form.checkValidity()) { form.classList.add('was-validated'); error.textContent='Please complete all required delivery details.'; error.style.display='block'; return; }
+      const order = { id:'TW-' + Date.now().toString().slice(-8), items:cart, customer:{firstName:$('firstName').value.trim(),lastName:$('lastName').value.trim(),email:$('email').value.trim(),phone:$('phone').value.trim(),address:$('address').value.trim(),city:$('city').value.trim(),state:$('state').value,pin:$('pin').value.trim()}, payment:document.querySelector('input[name="payment"]:checked').value, total:$('grandTotal').textContent, createdAt:new Date().toISOString() };
+      const orders=JSON.parse(localStorage.getItem('tw_orders') || '[]'); orders.push(order); localStorage.setItem('tw_orders',JSON.stringify(orders)); localStorage.removeItem('tw_cart'); cart=[];
+      $('checkoutContent').style.display='none'; $('success').classList.add('show'); $('successText').textContent='Order '+order.id+' was placed for '+order.total+'. A confirmation has been saved in this browser.';
+    });
+    renderOrder();
+  </script>
+</body>
+</html>

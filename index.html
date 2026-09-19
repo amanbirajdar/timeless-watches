@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeless Watches – Luxury Watch Store India</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <i class="bi bi-smartwatch"></i>Timeless Watches
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="color:var(--silver);">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#collection">Collection</a></li>
+        <li class="nav-item"><a class="nav-link" href="#brands">Brands</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0 flex-wrap">
+        <!-- Search -->
+        <div class="input-group nav-search" style="width:190px;">
+          <input id="searchInput" type="text" class="form-control" placeholder="Search watches...">
+          <button class="btn-search" onclick="doSearch()"><i class="bi bi-search"></i></button>
+        </div>
+
+        <!-- Cart -->
+        <button class="btn-cart-nav position-relative" onclick="toggleCart()">
+          <i class="bi bi-bag me-1"></i>Cart
+          <span id="cart-count" style="display:none;">0</span>
+        </button>
+
+        <!-- Login Button (logged out) -->
+        <a id="loginNavBtn" href="login.html" class="btn-login-nav">
+          <i class="bi bi-person-circle me-1"></i>Login
+        </a>
+
+        <!-- User Dropdown (logged in) -->
+        <div id="userNavMenu" style="display:none;">
+          <div class="dropdown">
+            <button class="user-dropdown-toggle dropdown-toggle border-0" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              <span id="userNavName"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark-custom">
+              <li><div class="user-info-item"><i class="bi bi-envelope me-2"></i><span id="userNavEmail"></span></div></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="#orders" onclick="return handleAccountAction('orders')">
+                  <i class="bi bi-bag me-2" style="color:var(--accent)"></i>My Orders
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#wishlist" onclick="return handleAccountAction('wishlist')">
+                  <i class="bi bi-heart me-2" style="color:var(--accent)"></i>Wishlist
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#profile" onclick="return handleAccountAction('profile')">
+                  <i class="bi bi-person me-2" style="color:var(--accent)"></i>My Profile
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="#" onclick="return logout()" style="color:var(--danger);">
+                  <i class="bi bi-box-arrow-right me-2"></i>Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="container position-relative">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="hero-badge">New Collection 2026</div>
+        <h1 class="hero-title">
+          Time Defines<br>
+          <span class="gradient-text">Excellence</span>
+        </h1>
+        <p class="hero-subtitle mt-4 mb-4">
+          Discover India's finest curated selection of luxury timepieces — crafted for those who demand precision, elegance, and timeless style.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mb-4">
+          <a href="#collection" class="btn-primary-custom">
+            Shop Now <i class="bi bi-arrow-right"></i>
+          </a>
+          <a href="#brands" class="btn-outline-custom">
+            View Brands <i class="bi bi-gem"></i>
+          </a>
+        </div>
+        <div class="hero-pills">
+          <div class="hero-pill"><i class="bi bi-shield-check"></i> 100% Authentic</div>
+          <div class="hero-pill"><i class="bi bi-truck"></i> Free Shipping</div>
+          <div class="hero-pill"><i class="bi bi-arrow-counterclockwise"></i> 30-Day Returns</div>
+          <div class="hero-pill"><i class="bi bi-award"></i> EMI Available</div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-watch-display">
+          <div class="hero-watch-ring"></div>
+          <div class="hero-watch-ring"></div>
+          <div class="hero-watch-icon-wrap">
+            <i class="bi bi-smartwatch"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     STATS
+     ===================================================== -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-num counter" data-target="500">0</div>
+        <div class="stat-label">Watch Models</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-num counter" data-target="25">0</div>
+        <div class="stat-label">Premium Brands</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-num counter" data-target="12000">0</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-num counter" data-target="15">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     COLLECTION
+     ===================================================== -->
+<section class="py-5" id="collection" style="background:var(--navy);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Our Products</div>
+      <h2 class="section-title">Featured <span>Collection</span></h2>
+      <div class="blue-divider"></div>
+      <p class="section-subtitle mt-3">Handpicked timepieces for every occasion and taste</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="filterBtns">
+      <button class="filter-btn active" data-filter="all">All Watches</button>
+      <button class="filter-btn" data-filter="luxury">Luxury</button>
+      <button class="filter-btn" data-filter="sport">Sport</button>
+      <button class="filter-btn" data-filter="classic">Classic</button>
+      <button class="filter-btn" data-filter="smart">Smart</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="row g-4" id="productsGrid"></div>
+
+    <!-- No results -->
+    <div id="noResults" class="text-center py-5" style="display:none;">
+      <i class="bi bi-search fs-1" style="color:var(--text-muted);"></i>
+      <p class="mt-3" style="color:var(--text-muted);">No watches found. Try a different search or filter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FEATURES
+     ===================================================== -->
+<section class="features-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title">Our <span>Promise</span></h2>
+      <div class="blue-divider"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon-wrap"><i class="bi bi-shield-check"></i></div>
+          <h5>Authentic Guarantee</h5>
+          <p>Every watch verified and certified. Official brand documentation included with every purchase.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon-wrap"><i class="bi bi-truck"></i></div>
+          <h5>Free Shipping India</h5>
+          <p>Free insured express delivery across India on all orders above ₹10,000.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon-wrap"><i class="bi bi-arrow-counterclockwise"></i></div>
+          <h5>30-Day Returns</h5>
+          <p>Not fully satisfied? Return within 30 days for a full refund, no questions asked.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon-wrap"><i class="bi bi-headset"></i></div>
+          <h5>24/7 Expert Support</h5>
+          <p>Our watch specialists are always available to guide your purchase decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     BRANDS
+     ===================================================== -->
+<section class="brands-section py-5" id="brands">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Top Brands</div>
+      <h2 class="section-title">Trusted <span>Brands</span></h2>
+      <div class="blue-divider"></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('Rolex')">ROLEX</button></div>
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('Omega')">OMEGA</button></div>
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('TAG Heuer')">TAG HEUER</button></div>
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('Hublot')">HUBLOT</button></div>
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('Breitling')">BREITLING</button></div>
+      <div class="col-6 col-md-4 col-lg-2"><button class="brand-card" onclick="selectBrand('Seiko')">SEIKO</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     PROMO BANNER
+     ===================================================== -->
+<section class="promo-banner py-5">
+  <div class="container text-center position-relative">
+    <div class="section-tag justify-content-center">Limited Time</div>
+    <h2 class="promo-title mt-2">Monsoon Sale — Up to <span>30% OFF</span></h2>
+    <p style="color:var(--text-muted);font-size:1rem;margin:16px 0 28px;">
+      Exclusive savings on selected luxury timepieces. While stocks last.
+    </p>
+    <a href="#collection" class="btn-primary-custom" style="display:inline-flex;">
+      Shop the Sale <i class="bi bi-lightning-charge"></i>
+    </a>
+  </div>
+</section>
+
+<!-- =====================================================
+     TESTIMONIALS
+     ===================================================== -->
+<section class="testimonials-section py-5" id="testimonials">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Testimonials</div>
+      <h2 class="section-title">What Customers <span>Say</span></h2>
+      <div class="blue-divider"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="quote-icon">"</div>
+          <div class="stars-gold mb-3">★★★★★</div>
+          <p class="testimonial-text">"Absolutely stunning Rolex Submariner. The packaging was luxurious and it arrived in perfect condition. Timeless Watches is now my go-to for luxury watches!"</p>
+          <div class="d-flex align-items-center gap-3 mt-4">
+            <div class="avatar-wrap"><i class="bi bi-person"></i></div>
+            <div>
+              <div class="testimonial-author">Rahul Mehta</div>
+              <div class="testimonial-role">Verified Buyer · Mumbai</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="quote-icon">"</div>
+          <div class="stars-gold mb-3">★★★★★</div>
+          <p class="testimonial-text">"Super fast delivery to Delhi, 100% authentic product. The customer support team helped me choose the perfect watch for my dad's birthday. Highly recommend!"</p>
+          <div class="d-flex align-items-center gap-3 mt-4">
+            <div class="avatar-wrap"><i class="bi bi-person"></i></div>
+            <div>
+              <div class="testimonial-author">Priya Sharma</div>
+              <div class="testimonial-role">Verified Buyer · New Delhi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="quote-icon">"</div>
+          <div class="stars-gold mb-3">★★★★☆</div>
+          <p class="testimonial-text">"Got the Omega Speedmaster as an anniversary gift. The unboxing experience was incredible. My husband absolutely loves it. Worth every rupee!"</p>
+          <div class="d-flex align-items-center gap-3 mt-4">
+            <div class="avatar-wrap"><i class="bi bi-person"></i></div>
+            <div>
+              <div class="testimonial-author">Anjali Patel</div>
+              <div class="testimonial-role">Verified Buyer · Bengaluru</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     NEWSLETTER
+     ===================================================== -->
+<section class="newsletter-section py-5">
+  <div class="container text-center">
+    <div class="section-tag justify-content-center">Stay Updated</div>
+    <h2 class="section-title mt-2">Get <span>Exclusive</span> Deals</h2>
+    <p style="color:var(--text-muted);font-size:0.95rem;margin:14px 0 28px;">
+      Subscribe for new arrivals, exclusive offers, and watch news. No spam ever.
+    </p>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <form class="newsletter-form d-flex" onsubmit="subscribeNewsletter(event)">
+          <input type="email" class="form-control" placeholder="Enter your email address" required>
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CONTACT
+     ===================================================== -->
+<section class="contact-section py-5" id="contact">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Contact <span>Us</span></h2>
+      <div class="blue-divider"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="contact-info-card">
+          <h5 style="color:var(--white);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:8px;">
+            Visit Our Showroom
+          </h5>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:20px;">
+            Experience luxury timepieces in person at our flagship store.
+          </p>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <strong>Address</strong>
+              <span>42 Luxury Lane, Connaught Place<br>New Delhi – 110001, India</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="bi bi-telephone-fill"></i></div>
+            <div>
+              <strong>Phone</strong>
+              <span>+91 98765 43210</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="bi bi-envelope-fill"></i></div>
+            <div>
+              <strong>Email</strong>
+              <span>contact@timelesswatches.in</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap"><i class="bi bi-clock-fill"></i></div>
+            <div>
+              <strong>Store Hours</strong>
+              <span>Mon–Sat: 10:00am – 8:00pm<br>Sunday: 11:00am – 6:00pm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="contact-form-card">
+          <h5 style="color:var(--white);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:20px;">
+            Send Us a Message
+          </h5>
+          <form onsubmit="submitContact(event)">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-sm-6">
+                <input type="email" class="form-control" placeholder="Your Email" required>
+              </div>
+              <div class="col-sm-6">
+                <input type="tel" class="form-control" placeholder="Phone Number">
+              </div>
+              <div class="col-sm-6">
+                <select class="form-select">
+                  <option value="" selected disabled style="background:var(--navy2)">Select Topic</option>
+                  <option style="background:var(--navy2)">Product Inquiry</option>
+                  <option style="background:var(--navy2)">Order Support</option>
+                  <option style="background:var(--navy2)">Returns & Refunds</option>
+                  <option style="background:var(--navy2)">Authentication</option>
+                  <option style="background:var(--navy2)">Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <textarea class="form-control" rows="4" placeholder="Your message..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-send">
+                  Send Message <i class="bi bi-send ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+<footer class="pt-5 pb-0">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-md-4">
+        <div class="footer-brand mb-3">
+          <i class="bi bi-smartwatch me-2" style="-webkit-text-fill-color:var(--accent);"></i>Timeless
+        </div>
+        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;max-width:280px;">
+          India's premier destination for authentic luxury timepieces. Bringing the world's finest watches to your wrist since 2011.
+        </p>
+        <div class="d-flex gap-2 mt-4">
+          <a href="https://www.instagram.com/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.facebook.com/" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com/" class="social-btn" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.youtube.com/" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="https://wa.me/919876543210" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6>Shop</h6>
+        <a href="#collection" onclick="return selectCategory('luxury')">Luxury Watches</a>
+        <a href="#collection" onclick="return selectCategory('sport')">Sport Watches</a>
+        <a href="#collection" onclick="return selectCategory('classic')">Classic Watches</a>
+        <a href="#collection" onclick="return selectCategory('smart')">Smart Watches</a>
+        <a href="#collection" onclick="return selectSale()">Sale</a>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6>Help</h6>
+        <a href="#contact" onclick="return showHelp('FAQ')">FAQ</a>
+        <a href="#contact" onclick="return showHelp('Shipping Information')">Shipping Info</a>
+        <a href="#contact" onclick="return showHelp('Returns')">Returns</a>
+        <a href="#contact" onclick="return showHelp('Size Guide')">Size Guide</a>
+        <a href="#contact" onclick="return showHelp('Track Order')">Track Order</a>
+      </div>
+      <div class="col-md-4">
+        <h6>Newsletter</h6>
+        <p style="color:var(--text-muted);font-size:0.83rem;margin-bottom:14px;">Get the latest deals and new arrivals.</p>
+        <form class="newsletter-form d-flex" onsubmit="subscribeNewsletter(event)">
+          <input type="email" class="form-control" placeholder="Email address" required style="font-size:0.82rem;padding:10px 16px;">
+          <button type="submit" class="btn-subscribe" style="padding:10px 18px;font-size:0.82rem;">Go</button>
+        </form>
+        <div class="mt-3 d-flex align-items-center gap-2" style="color:var(--text-muted);font-size:0.78rem;">
+          <i class="bi bi-lock-fill" style="color:var(--accent);"></i> Secure checkout · SSL encrypted
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span>© 2026 Timeless Watches India Pvt. Ltd. All rights reserved.</span>
+      <div class="d-flex gap-3">
+        <a href="#contact" onclick="return showHelp('Privacy Policy')">Privacy Policy</a>
+        <a href="#contact" onclick="return showHelp('Terms of Service')">Terms of Service</a>
+        <a href="#contact" onclick="return showHelp('Cookie Policy')">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =====================================================
+     CART SIDEBAR
+     ===================================================== -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h5><i class="bi bi-bag-heart-fill"></i>Your Cart</h5>
+    <button class="btn-close-cart" onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="empty-cart">
+      <i class="bi bi-bag-x"></i>
+      <p>Your cart is empty.<br>Explore our collection!</p>
+      <button class="btn-shop" onclick="toggleCart()">Shop Now</button>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total Amount</span>
+      <span class="cart-total-value" id="cartTotal">₹0</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">
+      <i class="bi bi-lock me-2"></i>Secure Checkout
+    </button>
+    <button class="btn-clear-cart" onclick="clearCart()">
+      <i class="bi bi-trash me-1"></i>Clear Cart
+    </button>
+  </div>
+</div>
+
+<!-- =====================================================
+     QUICK VIEW MODAL
+     ===================================================== -->
+<div class="modal fade" id="quickViewModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0 px-4 pt-4">
+        <span style="color:var(--text-muted);font-size:0.82rem;">Quick View</span>
+        <button class="btn-close-modal" data-bs-dismiss="modal">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="row g-4">
+          <div class="col-md-5">
+            <img id="qvImg" src="" alt="" class="qv-img"
+                 onerror="this.style.background='var(--navy3)'">
+          </div>
+          <div class="col-md-7">
+            <div class="qv-brand" id="qvBrand"></div>
+            <h3 style="color:var(--white);font-family:'Playfair Display',serif;font-size:1.6rem;margin:8px 0;" id="qvName"></h3>
+            <div class="stars-gold mb-2">
+              <span id="qvStars"></span>
+              <small style="color:var(--text-muted);margin-left:6px;" id="qvReviews"></small>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <span class="qv-price" id="qvPrice"></span>
+              <span class="qv-old-price" id="qvOldPrice"></span>
+              <span class="discount-badge" id="qvDiscount"></span>
+            </div>
+
+            <!-- Specs -->
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+              <div style="color:var(--text-muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Specifications</div>
+              <div id="qvSpecs"></div>
+            </div>
+
+            <div class="d-flex gap-2 mb-4 flex-wrap" style="font-size:0.8rem;color:var(--text-muted);">
+              <span><i class="bi bi-shield-check me-1" style="color:var(--success)"></i>Authentic Guarantee</span>
+              <span><i class="bi bi-truck me-1" style="color:var(--success)"></i>Free Shipping</span>
+              <span><i class="bi bi-credit-card me-1" style="color:var(--success)"></i>EMI Available</span>
+            </div>
+
+            <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:10px;">
+              Category: <span id="qvCategory" style="color:var(--accent);font-weight:500;text-transform:capitalize;"></span>
+            </div>
+
+            <button class="btn-qv-cart" id="qvAddCart">
+              <i class="bi bi-bag-plus me-2"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     BACK TO TOP
+     ===================================================== -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="bi bi-chevron-up"></i>
+</button>
+
+<!-- =====================================================
+     TOAST CONTAINER
+     ===================================================== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js?v=20260919"></script>
+</body>
+</html>

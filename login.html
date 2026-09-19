@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Timeless Watches</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #0a0e1a;
+      --navy2:      #0f1628;
+      --navy3:      #151d35;
+      --blue:       #1a73e8;
+      --blue-light: #4da3ff;
+      --accent:     #00d4ff;
+      --silver:     #c0c8d8;
+      --silver2:    #e8ecf4;
+      --text-muted: #7a8ba0;
+      --border:     rgba(255,255,255,0.08);
+      --danger:     #ff4757;
+      --success:    #2ed573;
+      --glow:       0 0 30px rgba(26,115,232,0.3);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    /* BG grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(26,115,232,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,115,232,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,115,232,0.12) 0%, transparent 70%);
+      top: -150px; left: -150px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      position: relative; z-index: 10;
+      padding: 18px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,14,26,0.8);
+      backdrop-filter: blur(20px);
+    }
+    .brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      background: linear-gradient(135deg, #4da3ff, #00d4ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
+    }
+    .btn-back {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--silver);
+      border-radius: 20px; padding: 7px 18px;
+      font-size: 0.82rem; text-decoration: none;
+      transition: all 0.25s; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-back:hover {
+      background: rgba(26,115,232,0.15);
+      border-color: rgba(26,115,232,0.4);
+      color: var(--blue-light);
+    }
+
+    /* ── WRAPPER ── */
+    .auth-wrapper {
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
+      padding: 40px 16px;
+      position: relative; z-index: 10;
+    }
+
+    /* ── CARD ── */
+    .auth-card {
+      width: 100%; max-width: 480px;
+      background: rgba(15,22,40,0.95);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), var(--glow);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    /* ── TABS ── */
+    .auth-tabs { display: flex; background: rgba(10,14,26,0.8); }
+    .auth-tab {
+      flex: 1; padding: 18px 12px;
+      text-align: center; font-size: 0.88rem;
+      font-weight: 600; cursor: pointer;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.25s; letter-spacing: 0.3px;
+    }
+    .auth-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background: rgba(0,212,255,0.04);
+    }
+    .auth-tab i { margin-right: 6px; }
+
+    /* ── BODY ── */
+    .auth-body { padding: 36px 40px 28px; }
+    @media(max-width:500px){ .auth-body { padding: 28px 22px 22px; } }
+    .auth-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--silver2); margin-bottom: 6px;
+    }
+    .auth-body .sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 28px; }
+
+    /* ── FORM CONTROLS ── */
+    .form-label { color: var(--silver); font-size: 0.82rem; font-weight: 500; margin-bottom: 6px; }
+    .form-control, .form-select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--silver2);
+      border-radius: 12px; padding: 12px 16px;
+      font-size: 0.9rem; font-family: 'Poppins', sans-serif;
+      transition: all 0.25s;
+    }
+    .form-control:focus, .form-select:focus {
+      background: rgba(255,255,255,0.07);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,115,232,0.18);
+      color: var(--silver2);
+    }
+    .form-control::placeholder { color: var(--text-muted); }
+    .form-control.is-invalid { border-color: var(--danger) !important; }
+    .form-control.is-valid   { border-color: var(--success) !important; }
+    .invalid-feedback { font-size: 0.77rem; color: var(--danger); margin-top: 5px; }
+    .valid-feedback   { font-size: 0.77rem; color: var(--success); margin-top: 5px; }
+
+    /* password toggle */
+    .pw-wrap { position: relative; }
+    .pw-wrap .form-control { padding-right: 46px; }
+    .btn-eye {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      background: none; border: none;
+      color: var(--text-muted); padding: 0 14px;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .btn-eye:hover { color: var(--blue-light); }
+
+    /* phone prefix */
+    .phone-prefix {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-right: none;
+      border-radius: 12px 0 0 12px;
+      color: var(--silver); padding: 0 14px;
+      font-size: 0.88rem; display: flex; align-items: center;
+      white-space: nowrap;
+    }
+    .phone-wrap .form-control { border-radius: 0 12px 12px 0; }
+
+    /* ── STRENGTH BAR ── */
+    .strength-wrap { margin-top: 8px; }
+    .strength-bar { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+    .strength-fill { height: 100%; width: 0; border-radius: 2px; transition: all 0.35s; }
+    .strength-label { font-size: 0.74rem; margin-top: 4px; }
+
+    /* ── CHECKBOX ── */
+    .form-check-input {
+      background-color: rgba(255,255,255,0.06);
+      border-color: var(--border);
+      width: 16px; height: 16px;
+    }
+    .form-check-input:checked { background-color: var(--blue); border-color: var(--blue); }
+    .form-check-label { color: var(--text-muted); font-size: 0.82rem; }
+    .form-check-label a { color: var(--accent); text-decoration: none; }
+    .form-check-label a:hover { text-decoration: underline; }
+
+    /* ── ALERTS ── */
+    .auth-alert {
+      border-radius: 10px; font-size: 0.84rem;
+      padding: 11px 15px; margin-bottom: 18px;
+      display: none; align-items: center; gap: 9px;
+    }
+    .auth-alert.show { display: flex; }
+    .alert-error   { background: rgba(255,71,87,0.12); border: 1px solid rgba(255,71,87,0.3); color: #ff6b81; }
+    .alert-success { background: rgba(46,213,115,0.1); border: 1px solid rgba(46,213,115,0.3); color: var(--success); }
+    .alert-info    { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); color: var(--accent); }
+
+    /* ── MAIN BUTTON ── */
+    .btn-auth {
+      background: linear-gradient(135deg, var(--blue), #0d5cc7);
+      border: none; color: #fff;
+      width: 100%; border-radius: 12px; padding: 13px;
+      font-weight: 700; font-size: 0.95rem;
+      transition: all 0.3s; font-family: 'Poppins', sans-serif;
+    }
+    .btn-auth:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(26,115,232,0.45); color: #fff; }
+    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-auth .spinner-border { width: 1rem; height: 1rem; border-width: 2px; }
+
+    /* ── DIVIDER ── */
+    .or-divider { display: flex; align-items: center; gap: 14px; margin: 22px 0; }
+    .or-divider span { color: var(--text-muted); font-size: 0.78rem; white-space: nowrap; }
+    .or-divider::before, .or-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    /* ── SOCIAL ── */
+    .btn-social {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--silver); border-radius: 12px;
+      padding: 10px 14px; font-size: 0.84rem;
+      font-family:'Poppins',sans-serif;
+      width:100%; text-align:center; cursor:pointer;
+      transition: all 0.25s; display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .btn-social:hover { border-color: var(--blue); color: var(--blue-light); background: rgba(26,115,232,0.08); }
+
+    /* ── FOOTER ── */
+    .auth-footer { text-align:center; padding:0 40px 30px; color:var(--text-muted); font-size:0.82rem; }
+    .auth-footer a { color:var(--accent); text-decoration:none; }
+    .auth-footer a:hover { text-decoration:underline; }
+
+    /* ── SUCCESS SCREEN ── */
+    #successScreen { display:none; text-align:center; padding:54px 40px; }
+    .success-icon-wrap {
+      width:90px; height:90px; margin:0 auto 20px;
+      background: linear-gradient(135deg,rgba(26,115,232,0.15),rgba(0,212,255,0.15));
+      border:1px solid rgba(0,212,255,0.3);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      animation: popIn 0.5s ease;
+    }
+    @keyframes popIn { 0%{transform:scale(0);opacity:0} 80%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+    .success-icon-wrap i { font-size:2.8rem; color:var(--accent); }
+    #successScreen h4 { color:var(--silver2); font-family:'Playfair Display',serif; font-size:1.6rem; margin-bottom:8px; }
+    #successScreen p  { color:var(--text-muted); font-size:0.88rem; }
+    .redirect-bar { margin:20px auto 0; max-width:200px; }
+    .redirect-bar-inner { height:4px; background:linear-gradient(135deg,var(--blue),var(--accent)); border-radius:2px; width:0; transition:width 3s linear; }
+    .redirect-text { color:var(--text-muted); font-size:0.78rem; margin-top:6px; }
+
+    /* ── PAGE FOOTER ── */
+    .page-footer { text-align:center; padding:16px; color:var(--text-muted); font-size:0.76rem; position:relative; z-index:10; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:var(--navy)} ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a class="brand-logo" href="index.html"><i class="bi bi-smartwatch" style="-webkit-text-fill-color:var(--accent);margin-right:8px;"></i>Timeless Watches</a>
+  <a href="index.html" class="btn-back"><i class="bi bi-arrow-left"></i> Back to Store</a>
+</div>
+
+<!-- AUTH WRAPPER -->
+<div class="auth-wrapper">
+  <div class="auth-card">
+
+    <!-- TABS -->
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tabLogin" onclick="switchTab('login')">
+        <i class="bi bi-box-arrow-in-right"></i>Sign In
+      </div>
+      <div class="auth-tab" id="tabRegister" onclick="switchTab('register')">
+        <i class="bi bi-person-plus"></i>Register
+      </div>
+    </div>
+
+    <!-- ===== LOGIN PANEL ===== -->
+    <div id="loginPanel">
+      <div class="auth-body">
+        <h4>Welcome Back</h4>
+        <p class="sub">Sign in to access your account &amp; orders</p>
+
+        <div class="auth-alert alert-error" id="loginError"></div>
+        <div class="auth-alert alert-success" id="loginSuccess"></div>
+
+        <form id="loginForm" novalidate onsubmit="handleLogin(event)">
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="yourname@example.com" autocomplete="email" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label d-flex justify-content-between align-items-center">
+              Password
+              <a href="#" onclick="switchTab('forgot')" style="color:var(--accent);font-size:0.78rem;text-decoration:none;" tabindex="-1">Forgot password?</a>
+            </label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required>
+              <button type="button" class="btn-eye" onclick="togglePw('loginPassword',this)" tabindex="-1"><i class="bi bi-eye"></i></button>
+            </div>
+            <div class="invalid-feedback">Password is required.</div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="form-check mb-0">
+              <input class="form-check-input" type="checkbox" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-auth" id="loginBtn">
+            Sign In <i class="bi bi-arrow-right ms-1"></i>
+          </button>
+        </form>
+
+        <div class="or-divider"><span>or continue with</span></div>
+        <div class="row g-2">
+          <div class="col-6">
+            <button class="btn-social" onclick="socialLogin('Google')">
+              <img src="https://www.google.com/favicon.ico" width="15" alt="G"> Google
+            </button>
+          </div>
+          <div class="col-6">
+            <button class="btn-social" onclick="socialLogin('Facebook')">
+              <i class="bi bi-facebook" style="color:#1877f2;font-size:1rem;"></i> Facebook
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="auth-footer">
+        Don't have an account? <a href="#" onclick="switchTab('register')">Create one free</a>
+      </div>
+    </div>
+
+    <!-- ===== REGISTER PANEL ===== -->
+    <div id="registerPanel" style="display:none;">
+      <div class="auth-body">
+        <h4>Create Account</h4>
+        <p class="sub">Join thousands of watch enthusiasts across India</p>
+
+        <div class="auth-alert alert-error" id="registerError"></div>
+
+        <form id="registerForm" novalidate onsubmit="handleRegister(event)">
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-control" id="regFirst" placeholder="Arjun" required minlength="2">
+              <div class="invalid-feedback">Min 2 characters.</div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="regLast" placeholder="Sharma" required minlength="2">
+              <div class="invalid-feedback">Min 2 characters.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="regEmail" placeholder="yourname@example.com" autocomplete="email" required>
+            <div class="invalid-feedback">Enter a valid email.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <div class="input-group phone-wrap">
+              <span class="phone-prefix"><i class="bi bi-flag me-1" style="color:var(--accent)"></i>+91</span>
+              <input type="tel" class="form-control" id="regPhone" placeholder="98765 43210" maxlength="10" pattern="[6-9][0-9]{9}" required>
+            </div>
+            <div class="invalid-feedback" id="phoneError">Enter a valid 10-digit Indian number.</div>
+          </div>
+
+          <div class="mb-1">
+            <label class="form-label">Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="regPassword" placeholder="Min. 8 characters" required oninput="checkStrength(this.value)">
+              <button type="button" class="btn-eye" onclick="togglePw('regPassword',this)" tabindex="-1"><i class="bi bi-eye"></i></button>
+            </div>
+            <div class="strength-wrap">
+              <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+              <div class="strength-label" id="strengthLabel" style="color:var(--text-muted)"></div>
+            </div>
+            <div class="invalid-feedback">Password is required.</div>
+          </div>
+
+          <div class="mb-4 mt-3">
+            <label class="form-label">Confirm Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="regConfirm" placeholder="Repeat your password" required>
+              <button type="button" class="btn-eye" onclick="togglePw('regConfirm',this)" tabindex="-1"><i class="bi bi-eye"></i></button>
+            </div>
+            <div class="invalid-feedback" id="confirmError">Passwords do not match.</div>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+            <label class="form-check-label" for="agreeTerms">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </label>
+            <div class="invalid-feedback">You must agree to continue.</div>
+          </div>
+
+          <button type="submit" class="btn-auth" id="registerBtn">
+            Create Account <i class="bi bi-arrow-right ms-1"></i>
+          </button>
+        </form>
+      </div>
+      <div class="auth-footer">
+        Already have an account? <a href="#" onclick="switchTab('login')">Sign in here</a>
+      </div>
+    </div>
+
+    <!-- ===== FORGOT PASSWORD PANEL ===== -->
+    <div id="forgotPanel" style="display:none;">
+      <div class="auth-body">
+        <h4>Reset Password</h4>
+        <p class="sub">Enter your email and we'll send a reset link</p>
+        <div class="auth-alert alert-success" id="forgotSuccess"></div>
+        <div class="auth-alert alert-error"   id="forgotError"></div>
+        <form onsubmit="handleForgot(event)" id="forgotForm">
+          <div class="mb-4">
+            <label class="form-label">Registered Email</label>
+            <input type="email" class="form-control" id="forgotEmail" placeholder="yourname@example.com" required>
+          </div>
+          <button type="submit" class="btn-auth" id="forgotBtn">
+            Send Reset Link <i class="bi bi-envelope ms-1"></i>
+          </button>
+        </form>
+        <div class="text-center mt-4" style="font-size:0.84rem;">
+          <a href="#" onclick="switchTab('login')" style="color:var(--accent);text-decoration:none;">
+            <i class="bi bi-arrow-left me-1"></i>Back to Login
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SUCCESS SCREEN ===== -->
+    <div id="successScreen">
+      <div class="success-icon-wrap"><i class="bi bi-check-lg"></i></div>
+      <h4 id="successTitle">Login Successful!</h4>
+      <p id="successMsg">Welcome back! Redirecting to store...</p>
+      <div class="redirect-bar">
+        <div class="redirect-bar-inner" id="redirectBar"></div>
+        <div class="redirect-text">Redirecting in 3 seconds...</div>
+      </div>
+    </div>
+
+  </div><!-- /.auth-card -->
+</div><!-- /.auth-wrapper -->
+
+<div class="page-footer">© 2026 Timeless Watches India · All rights reserved</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ============================================================
+   AUTH.JS – Embedded in login.html
+   ============================================================ */
+
+// ── Helpers ──────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+
+function getUsers()     { return JSON.parse(localStorage.getItem('tw_users') || '[]'); }
+function saveUsers(arr) { localStorage.setItem('tw_users', JSON.stringify(arr)); }
+function getSession()   {
+  try { return JSON.parse(localStorage.getItem('tw_session') || sessionStorage.getItem('tw_session') || 'null'); }
+  catch(e){ return null; }
+}
+
+function setLoading(btnId, on, original) {
+  const btn = $(btnId);
+  if (on) {
+    btn.disabled = true;
+    btn._orig = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner-border me-2" role="status"></span>Please wait...';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = btn._orig || original || 'Submit';
+  }
+}
+
+function showAlert(id, msg, type='error') {
+  const el = $(id);
+  el.className = `auth-alert alert-${type} show`;
+  el.innerHTML = `<i class="bi bi-${type==='error'?'exclamation-circle':'check-circle'} me-1"></i>${msg}`;
+}
+function hideAlert(id) { const el=$(id); el.classList.remove('show'); }
+function clearAllAlerts() {
+  ['loginError','loginSuccess','registerError','forgotSuccess','forgotError'].forEach(id => {
+    const el = $(id); if(el) el.classList.remove('show');
+  });
+}
+
+// ── Tab Switching ─────────────────────────────────────────────
+function switchTab(tab) {
+  ['loginPanel','registerPanel','forgotPanel','successScreen'].forEach(id => {
+    const el = $(id); if(el) el.style.display = 'none';
+  });
+  $('tabLogin').classList.toggle('active', tab==='login');
+  $('tabRegister').classList.toggle('active', tab==='register');
+
+  const panels = { login:'loginPanel', register:'registerPanel', forgot:'forgotPanel', success:'successScreen' };
+  if(panels[tab]) $(panels[tab]).style.display = '';
+  clearAllAlerts();
+}
+
+// ── Password Toggle ───────────────────────────────────────────
+function togglePw(inputId, btn) {
+  const inp = $(inputId);
+  const isText = inp.type === 'text';
+  inp.type = isText ? 'password' : 'text';
+  btn.querySelector('i').className = isText ? 'bi bi-eye' : 'bi bi-eye-slash';
+}
+
+// ── Password Strength ─────────────────────────────────────────
+function checkStrength(val) {
+  let score = 0;
+  if (val.length >= 8)          score++;
+  if (/[A-Z]/.test(val))        score++;
+  if (/[0-9]/.test(val))        score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+
+  const levels = [
+    { w:'0%',   c:'transparent', l:'' },
+    { w:'25%',  c:'#ff4757',     l:'Weak' },
+    { w:'50%',  c:'#ffa502',     l:'Fair' },
+    { w:'75%',  c:'#eccc68',     l:'Good' },
+    { w:'100%', c:'#2ed573',     l:'Strong ✓' },
+  ];
+  const lv = levels[score];
+  $('strengthFill').style.width = lv.w;
+  $('strengthFill').style.background = lv.c;
+  $('strengthLabel').textContent = lv.l;
+  $('strengthLabel').style.color = lv.c;
+}
+
+// ── Validate Email ────────────────────────────────────────────
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+}
+
+// ── Success & Redirect ────────────────────────────────────────
+function successRedirect(title, msg) {
+  switchTab('success');
+  $('successTitle').textContent = title;
+  $('successMsg').textContent   = msg;
+  // animate bar
+  setTimeout(() => { $('redirectBar').style.width = '100%'; }, 100);
+  setTimeout(() => { window.location.href = 'index.html'; }, 3200);
+}
+
+// ── LOGIN ─────────────────────────────────────────────────────
+function handleLogin(e) {
+  e.preventDefault();
+  clearAllAlerts();
+  const form  = $('loginForm');
+  const email = $('loginEmail').value.trim().toLowerCase();
+  const pass  = $('loginPassword').value;
+  const remember = $('rememberMe').checked;
+
+  // Client-side validation
+  let valid = true;
+  if (!isValidEmail(email)) {
+    $('loginEmail').classList.add('is-invalid'); valid = false;
+  } else { $('loginEmail').classList.remove('is-invalid'); }
+  if (!pass) {
+    $('loginPassword').classList.add('is-invalid'); valid = false;
+  } else { $('loginPassword').classList.remove('is-invalid'); }
+  if (!valid) return;
+
+  setLoading('loginBtn', true);
+
+  setTimeout(() => {
+    const users = getUsers();
+    const user  = users.find(u => u.email.toLowerCase() === email && u.password === pass);
+
+    if (!user) {
+      setLoading('loginBtn', false);
+      showAlert('loginError', 'Incorrect email or password. Please try again.');
+      $('loginPassword').classList.add('is-invalid');
+      return;
+    }
+
+    // Create session
+    const session = {
+      loggedIn: true,
+      name:     user.firstName,
+      lastName: user.lastName,
+      email:    user.email,
+      phone:    user.phone || '',
+      loginAt:  new Date().toISOString()
+    };
+
+    if (remember) {
+      localStorage.setItem('tw_session', JSON.stringify(session));
+    } else {
+      sessionStorage.setItem('tw_session', JSON.stringify(session));
+    }
+
+    setLoading('loginBtn', false);
+    successRedirect('Login Successful!', `Welcome back, ${user.firstName}! Redirecting to store...`);
+  }, 1100);
+}
+
+// ── REGISTER ──────────────────────────────────────────────────
+function handleRegister(e) {
+  e.preventDefault();
+  clearAllAlerts();
+
+  const firstName = $('regFirst').value.trim();
+  const lastName  = $('regLast').value.trim();
+  const email     = $('regEmail').value.trim().toLowerCase();
+  const phone     = $('regPhone').value.trim();
+  const pass      = $('regPassword').value;
+  const confirm   = $('regConfirm').value;
+  const agreed    = $('agreeTerms').checked;
+
+  let valid = true;
+  const setV = (id, ok) => { $(id).classList.toggle('is-invalid', !ok); $(id).classList.toggle('is-valid', ok); };
+
+  setV('regFirst',   firstName.length >= 2);
+  setV('regLast',    lastName.length >= 2);
+  setV('regEmail',   isValidEmail(email));
+  setV('regPhone',   /^[6-9][0-9]{9}$/.test(phone));
+  setV('regPassword', pass.length >= 8);
+  setV('agreeTerms', agreed);
+
+  if (firstName.length < 2) valid = false;
+  if (lastName.length  < 2) valid = false;
+  if (!isValidEmail(email)) valid = false;
+  if (!/^[6-9][0-9]{9}$/.test(phone)) { $('phoneError').style.display='block'; valid = false; } else { $('phoneError').style.display='none'; }
+  if (pass.length < 8) valid = false;
+  if (!agreed) valid = false;
+
+  if (pass !== confirm) {
+    $('regConfirm').classList.add('is-invalid');
+    $('confirmError').textContent = 'Passwords do not match.';
+    valid = false;
+  } else if (pass.length >= 8) {
+    $('regConfirm').classList.remove('is-invalid');
+    $('regConfirm').classList.add('is-valid');
+  }
+  if (!valid) return;
+
+  setLoading('registerBtn', true);
+
+  setTimeout(() => {
+    const users = getUsers();
+    if (users.find(u => u.email.toLowerCase() === email)) {
+      setLoading('registerBtn', false);
+      showAlert('registerError', 'An account with this email already exists. <a href="#" onclick="switchTab(\'login\')" style="color:var(--accent)">Sign in instead?</a>');
+      $('regEmail').classList.add('is-invalid');
+      return;
+    }
+
+    const newUser = {
+      firstName, lastName, email, phone, password: pass,
+      createdAt: new Date().toISOString()
+    };
+    users.push(newUser);
+    saveUsers(users);
+
+    // Auto-login
+    const session = { loggedIn:true, name:firstName, lastName, email, phone, loginAt: new Date().toISOString() };
+    sessionStorage.setItem('tw_session', JSON.stringify(session));
+
+    setLoading('registerBtn', false);
+    successRedirect('Account Created!', `Welcome, ${firstName}! Your account is ready.`);
+  }, 1400);
+}
+
+// ── FORGOT PASSWORD ───────────────────────────────────────────
+function handleForgot(e) {
+  e.preventDefault();
+  clearAllAlerts();
+  const email = $('forgotEmail').value.trim().toLowerCase();
+  if (!isValidEmail(email)) {
+    $('forgotEmail').classList.add('is-invalid');
+    return;
+  }
+  setLoading('forgotBtn', true);
+  setTimeout(() => {
+    setLoading('forgotBtn', false);
+    // Always show success regardless (security best practice)
+    showAlert('forgotSuccess', `If an account exists for <strong>${email}</strong>, a reset link has been sent.`, 'success');
+    $('forgotForm').reset();
+  }, 1000);
+}
+
+// ── SOCIAL LOGIN ──────────────────────────────────────────────
+function socialLogin(provider) {
+  const session = {
+    loggedIn: true,
+    name: provider + ' User',
+    lastName: '',
+    email: `user@${provider.toLowerCase()}.com`,
+    phone: '',
+    loginAt: new Date().toISOString()
+  };
+  sessionStorage.setItem('tw_session', JSON.stringify(session));
+  successRedirect(`${provider} Login Successful!`, 'Redirecting to your store...');
+}
+
+// ── AUTO-REDIRECT IF ALREADY LOGGED IN ───────────────────────
+(function init() {
+  const sess = getSession();
+  if (sess && sess.loggedIn) {
+    window.location.href = 'index.html';
+    return;
+  }
+  // Pre-fill email if remembered
+  const saved = localStorage.getItem('tw_remember_email');
+  if (saved) { $('loginEmail').value = saved; $('rememberMe').checked = true; }
+})();
+</script>
+</body>
+</html>
