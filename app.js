@@ -11,70 +11,70 @@ const PRODUCTS = [
     id: 1, name: 'Submariner Date', brand: 'Rolex',
     category: 'luxury', price: 1050000, oldPrice: null,
     rating: 5, reviews: 142, badge: 'bestseller',
-    img: 'images/rolex-submariner.jpg',
+    img: 'rolex-submariner.jpg',
     specs: { Movement: 'Automatic', Case: '41mm Steel', Water: '300m', Glass: 'Sapphire' }
   },
   {
     id: 2, name: 'Speedmaster Pro', brand: 'Omega',
     category: 'luxury', price: 570000, oldPrice: 630000,
     rating: 5, reviews: 98, badge: 'sale',
-    img: 'images/omega-speedmaster.jpg',
+    img: 'omega-speedmaster.jpg',
     specs: { Movement: 'Manual Wind', Case: '42mm Steel', Chronograph: 'Yes', Glass: 'Hesalite' }
   },
   {
     id: 3, name: 'Aquaracer 300M', brand: 'TAG Heuer',
     category: 'sport', price: 185000, oldPrice: null,
     rating: 4, reviews: 76, badge: 'new',
-    img: 'images/tag-heuer.jpg',
+    img: 'tag-heuer.jpg',
     specs: { Movement: 'Quartz', Case: '43mm Steel', Water: '300m', Glass: 'Sapphire' }
   },
   {
     id: 4, name: 'Superocean II', brand: 'Breitling',
     category: 'sport', price: 378000, oldPrice: 436000,
     rating: 4, reviews: 61, badge: 'sale',
-    img: 'images/breitling-superocean.jpg',
+    img: 'breitling-superocean.jpg',
     specs: { Movement: 'Automatic', Case: '44mm Steel', Water: '1000m', Glass: 'Sapphire' }
   },
   {
     id: 5, name: 'Presage Cocktail', brand: 'Seiko',
     category: 'classic', price: 37800, oldPrice: null,
     rating: 4, reviews: 210, badge: 'new',
-    img: 'images/seiko-presage.jpg',
+    img: 'seiko-presage.jpg',
     specs: { Movement: 'Automatic', Case: '40.5mm Steel', Water: '50m', Glass: 'Hardlex' }
   },
   {
     id: 6, name: 'Galaxy Watch Ultra', brand: 'Samsung',
     category: 'smart', price: 54600, oldPrice: 63000,
     rating: 4, reviews: 155, badge: 'sale',
-    img: 'images/samsung-galaxy.jpg',
+    img: 'samsung-galaxy.jpg',
     specs: { OS: 'Wear OS', Case: '47mm Titanium', Battery: '590mAh', GPS: 'Multi-band' }
   },
   {
     id: 7, name: 'Apple Watch Series 10', brand: 'Apple',
     category: 'smart', price: 67100, oldPrice: null,
     rating: 5, reviews: 430, badge: 'new',
-    img: 'images/apple-watch.jpg',
+    img: 'apple-watch.jpg',
     specs: { OS: 'watchOS', Case: '46mm Aluminium', Battery: '18hr', Health: 'ECG + SpO2' }
   },
   {
     id: 8, name: 'Big Bang Unico', brand: 'Hublot',
     category: 'sport', price: 1554000, oldPrice: 1680000,
     rating: 5, reviews: 47, badge: 'sale',
-    img: 'images/hublot-bigbang.jpg',
+    img: 'hublot-bigbang.jpg',
     specs: { Movement: 'UNICO HUB1242', Case: '42mm Carbon', Water: '100m', Glass: 'Sapphire' }
   },
   {
     id: 9, name: 'Reverso Classic', brand: 'Jaeger',
     category: 'classic', price: 655000, oldPrice: null,
     rating: 4, reviews: 28, badge: null,
-    img: 'images/jaeger-reverso.jpg',
+    img: 'jaeger-reverso.jpg',
     specs: { Movement: 'Manual Wind', Case: '38.8×23.8mm Steel', Water: '30m', Glass: 'Sapphire' }
   },
   {
     id: 10, name: 'Navitimer B01', brand: 'Breitling',
     category: 'luxury', price: 747600, oldPrice: null,
     rating: 5, reviews: 62, badge: 'new',
-    img: 'images/breitling-navitimer.jpg',
+    img: 'breitling-navitimer.jpg',
     specs: { Movement: 'B01 Chronograph', Case: '43mm Steel', Water: '30m', Glass: 'Sapphire' }
   }
 ];
