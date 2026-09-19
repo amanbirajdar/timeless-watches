@@ -1,3 +1,4 @@
-# Keep GitHub's language chart focused on the interactive application logic.
-*.html linguist-detectable=false
-*.css linguist-detectable=false
+# Let GitHub Linguist count the project's HTML, CSS, and JavaScript source.
+# Keep only generated assets out of the language chart.
+*.png linguist-generated=true
+*.jpg linguist-generated=true
